@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const profile_controller_1 = require("../controllers/profile.controller");
+const validate_id_middleware_1 = require("../middlewares/validate-id.middleware");
+const profileRouter = (0, express_1.Router)();
+profileRouter.get("/:id", validate_id_middleware_1.validateIdParam, profile_controller_1.getProfile);
+profileRouter.get("/", profile_controller_1.getAllProfiles);
+profileRouter.post("/", profile_controller_1.createProfile);
+profileRouter.put("/:id", validate_id_middleware_1.validateIdParam, profile_controller_1.getProfile);
+profileRouter.delete("/:id", validate_id_middleware_1.validateIdParam, profile_controller_1.deleteProfile);
+exports.default = profileRouter;

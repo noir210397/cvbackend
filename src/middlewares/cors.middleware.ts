@@ -1,6 +1,6 @@
 import cors, { CorsOptions } from 'cors';
 const allowedUrls = process.env.ALLOWED_URL
-const whitelist = [allowedUrls, "https://cvgenerator-cyan.vercel.app/"]
+const whitelist = [allowedUrls, "https://cvgenerator-cyan.vercel.app"]
 
 
 const corsOptions: CorsOptions = {

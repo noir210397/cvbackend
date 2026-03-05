@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cors_1 = __importDefault(require("cors"));
 const allowedUrls = process.env.ALLOWED_URL;
-const whitelist = [allowedUrls, "https://cvgenerator-cyan.vercel.app/"];
+const whitelist = [allowedUrls, "https://cvgenerator-cyan.vercel.app"];
 const corsOptions = {
     origin: (origin, callback) => {
         if (!origin || whitelist.includes(origin)) {

@@ -25,10 +25,12 @@ const generateDocument = async (req, res) => {
         if (process.env.NODE_ENV === "development") {
             browser = await puppeteer_1.default.launch();
         }
-        browser = await puppeteer_1.default.launch({
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for Render
-        });
+        else {
+            browser = await puppeteer_1.default.launch({
+                headless: true,
+                args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for Render
+            });
+        }
         const page = await browser.newPage();
         await page.goto(process.env.URL || `http://localhost:5500/cv/${doc.id}`, {
             waitUntil: 'networkidle2',

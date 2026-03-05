@@ -32,7 +32,7 @@ const generateDocument = async (req, res) => {
             });
         }
         const page = await browser.newPage();
-        await page.goto(process.env.URL || `http://localhost:5500/cv/${doc.id}`, {
+        await page.goto(process.env.URL || `https://cvgenerator-cyan.vercel.app/cv/${doc.id}`, {
             waitUntil: 'networkidle2',
         });
         const cv = await page.pdf({

@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import puppeteer from "puppeteer";
+import puppeteer, { Browser } from "puppeteer";
 import client from "src/config/openai";
 // import { v4 as uuidv4 } from "uuid"
 import { zodTextFormat } from "openai/helpers/zod"
@@ -16,7 +16,14 @@ const generateDocument: RequestHandler = async (req, res) => {
     const data = doc.data()
     if (!data) throw new AppError(400, undefined)
     if (data.type === "cv") {
-        const browser = await puppeteer.launch();
+        let browser: Browser
+        if (process.env.NODE_ENV === "development") {
+            browser = await puppeteer.launch();
+        }
+        browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for Render
+        });
         const page = await browser.newPage();
         await page.goto(process.env.URL! || `http://localhost:5500/cv/${doc.id}`, {
             waitUntil: 'networkidle2',

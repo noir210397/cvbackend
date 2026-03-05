@@ -21,7 +21,14 @@ const generateDocument = async (req, res) => {
     if (!data)
         throw new api_error_1.AppError(400, undefined);
     if (data.type === "cv") {
-        const browser = await puppeteer_1.default.launch();
+        let browser;
+        if (process.env.NODE_ENV === "development") {
+            browser = await puppeteer_1.default.launch();
+        }
+        browser = await puppeteer_1.default.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for Render
+        });
         const page = await browser.newPage();
         await page.goto(process.env.URL || `http://localhost:5500/cv/${doc.id}`, {
             waitUntil: 'networkidle2',

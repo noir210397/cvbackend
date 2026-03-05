@@ -1,0 +1,22 @@
+{
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs", // 👈 "Generate native ESM" — using import/export syntax
+    "moduleResolution": "node", // 👈 Tells TypeScript a bundler a will resolve the rest
+    "target": "ES2022", // 👈 Compiles your code to match ES2022 spec
+    "lib": ["ES2022", "DOM"], // 👈 Use all the built-in types and global definitions provided by ES2022 and Node.js.
+    "outDir": "dist", // 👈 Output folder for compiled JS files
+    "rootDir": "src", // 👈 Root folder for your source TS files
+    "paths": {
+     "src/*": ["src/*"]              // ✅ allow absolute imports from src
+    },
+    "esModuleInterop": true, // 👈 Allows importing CommonJS modules easily
+    "resolveJsonModule": true, // 👈 Lets you import JSON files with `import data from './data.json'`
+    "forceConsistentCasingInFileNames": true, // 👈 Prevents bugs between macOS and Windows file naming
+    "strict": true, // 👈 Enables all strict type checks (highly recommended)
+    "skipLibCheck": true, //👈 Skips type-checking .d.ts files in node_modules
+    "baseUrl": "." //👈 Makes imports relative to your project root.
+  },
+  "include": ["src"], // 👈 Only compile files inside the src/ folder
+  "exclude": ["dist", "node_modules"]
+}
